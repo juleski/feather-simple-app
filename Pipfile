@@ -7,9 +7,11 @@ name = "pypi"
 flask = "*"
 pre-commit = "*"
 python-dotenv = "*"
+flask-jwt-extended = {extras = ["asymmetric_crypto"], version = "*"}
 
 [dev-packages]
 black = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.9"

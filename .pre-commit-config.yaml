@@ -4,7 +4,13 @@ repos:
     hooks:
       - id: black
         language_version: python3 # Should be a command that runs python3.6+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: ''  # Use the sha / tag you want to point at
+    hooks:
+      - id: mypy
+        additional_dependencies: [Flask==1.1.2]
+
   - repo: https://gitlab.com/PyCQA/flake8
     rev: 3.8.3
     hooks:
-    -   id: flake8
+      - id: flake8
