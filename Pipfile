@@ -8,6 +8,7 @@ flask = "*"
 pre-commit = "*"
 python-dotenv = "*"
 flask-jwt-extended = {extras = ["asymmetric_crypto"], version = "*"}
+flask-pydantic = "*"
 
 [dev-packages]
 black = "*"
