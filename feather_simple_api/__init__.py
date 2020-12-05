@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from feather_simple_api.core import create_app
+from feather_simple_api.core import create_app, register_error_handlers
 from feather_simple_api.extensions.jwt_extended import (
     create_jwt_app,
     DEV_RSA_PRIVATE,
@@ -16,6 +16,9 @@ from sqlalchemy.ext.declarative import DeclarativeMeta
 load_dotenv()
 
 app = create_app(os.environ)
+
+# Register error handlers
+register_error_handlers(app)
 
 # jwt-extended related config
 jwt = create_jwt_app(app)
