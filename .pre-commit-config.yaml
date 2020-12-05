@@ -8,7 +8,7 @@ repos:
     rev: ''  # Use the sha / tag you want to point at
     hooks:
       - id: mypy
-        additional_dependencies: [Flask==1.1.2]
+        additional_dependencies: [Flask==1.1.2, Flask-SQLAlchemy==2.4.4]
 
   - repo: https://gitlab.com/PyCQA/flake8
     rev: 3.8.3

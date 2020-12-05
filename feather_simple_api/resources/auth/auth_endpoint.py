@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from flask_pydantic import validate
 
 from .validators import AuthBody
 from .auth_service import AuthService
+from .constants import EXCLUDE_KEYS
 
 service = AuthService()
 
@@ -12,13 +13,14 @@ blueprint = Blueprint("auth_endpoint", __name__)
 @blueprint.route("/signup", methods=["POST"])
 @validate()
 def signup(body: AuthBody):
-    access_token = service.signup()
+    response = service.signup(params=body)
 
-    return jsonify({"data": access_token})
+    return response.dict(exclude=EXCLUDE_KEYS)
 
 
 @blueprint.route("/login", methods=["POST"])
 @validate()
 def login(body: AuthBody):
-    access_token = service.signup()
-    return jsonify({"data": access_token})
+    response = service.login(params=body)
+
+    return response.dict(exclude=EXCLUDE_KEYS)

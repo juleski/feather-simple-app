@@ -9,6 +9,10 @@ pre-commit = "*"
 python-dotenv = "*"
 flask-jwt-extended = {extras = ["asymmetric_crypto"], version = "*"}
 flask-pydantic = "*"
+flask-sqlalchemy = "*"
+psycopg2 = "*"
+passlib = "*"
+email-validator = "*"
 
 [dev-packages]
 black = "*"
