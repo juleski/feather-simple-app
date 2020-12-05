@@ -11,6 +11,7 @@ from feather_simple_api.extensions.flask_sqlalchemy import (
     create_sqlalchemy_app,
     setup_guids_postgresql,
 )
+from sqlalchemy.ext.declarative import DeclarativeMeta
 
 load_dotenv()
 
@@ -28,6 +29,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = create_sqlalchemy_app(app)
 setup_guids_postgresql(db.engine)
+
+DbModel: DeclarativeMeta = db.Model
+Db: DeclarativeMeta = db
 
 # import models
 from .models import User  # noqa: F401, E402

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from feather_simple_api.core.typings import DbModel, Db
+from feather_simple_api import DbModel, Db
 
 from feather_simple_api.extensions.flask_sqlalchemy import (
     GUID,
