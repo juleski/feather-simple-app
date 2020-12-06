@@ -1,6 +1,6 @@
 from flask_jwt_extended import create_access_token
 from werkzeug.exceptions import UnprocessableEntity
-from feather_simple_api.resources.users.users_dao import UserDao
+from feather_simple_api.resources.users.users_dao import UsersDao
 
 from feather_simple_api.resources.users.user_dto import UserDto
 
@@ -10,8 +10,8 @@ from .validators import AuthBody
 
 
 class AuthService:
-    def __init__(self, UserDao=UserDao):
-        self.users_dao = UserDao()
+    def __init__(self, UsersDao=UsersDao):
+        self.users_dao = UsersDao()
 
     def signup(self, params: AuthBody) -> AuthResponse:
         params.password = encrypt_password(password=params.password)

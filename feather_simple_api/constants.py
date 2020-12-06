@@ -1,1 +1,2 @@
-EXCLUDE_KEYS = {"user": {"password"}}
+AUTH_EXCLUDE_KEYS = {"user": {"password"}}
+PROVIDER_EXCLUDE_KEYS = {"id", "created"}

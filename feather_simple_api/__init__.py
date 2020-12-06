@@ -26,6 +26,8 @@ jwt = create_jwt_app(app)
 app.config["JWT_PUBLIC_KEY"] = os.getenv("RSA_PUBLIC", DEV_RSA_PUBLIC)
 app.config["JWT_PRIVATE_KEY"] = os.getenv("RSA_PRIVATE", DEV_RSA_PRIVATE)
 app.config["JWT_ALGORITHM"] = "RS256"
+app.config["JWT_HEADER_TYPE"] = os.getenv("JWT_HEADER_TYPE", "")
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = os.getenv("JWT_ACCESS_TOKEN_EXPIRES", 3600)
 
 # flask-sqlalchmey related config
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URI")
