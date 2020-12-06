@@ -37,7 +37,7 @@ DbModel: DeclarativeMeta = db.Model
 Db: DeclarativeMeta = db
 
 # import models
-from .models import User  # noqa: F401, E402
+from .models import *  # noqa: F401, F403, E402
 
 db.create_all()
 
