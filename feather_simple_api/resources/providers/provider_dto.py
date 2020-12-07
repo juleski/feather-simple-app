@@ -10,7 +10,7 @@ class ProviderDto(BaseModel):
     price: float
     billing_period: str
     for_occupation: str
-    created: datetime
+    created: Optional[datetime]
 
     class Config:
         orm_mode = True

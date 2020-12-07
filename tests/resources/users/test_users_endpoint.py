@@ -1,4 +1,7 @@
 import pytest
+from flask_jwt_extended import create_access_token
+from feather_simple_api.constants import PROVIDER_EXCLUDE_KEYS
+from feather_simple_api.resources.providers.provider_dto import ProviderDto
 
 from .test_input import (
     complete_data,
@@ -7,7 +10,14 @@ from .test_input import (
     data_without_address,
     data_without_occupation,
     data_without_has_child,
+    user,
+    provider1,
+    provider2,
 )
+
+"""
+Tests for Create endpoint
+"""
 
 
 @pytest.mark.parametrize(
@@ -34,10 +44,43 @@ def test_create_success(client, test_input):
         (data_without_has_child, ["has_child field required"]),
     ],
 )
-def test_required_fields_error(client, test_input, expected):
+def test_required_fields_error_on_create(client, test_input, expected):
     response = client.post("/users/", json=test_input)
     json_response = response.get_json()
 
     assert response.status_code == 422
     assert "error" in json_response
     assert json_response["error"] == expected
+
+
+"""
+Tests for Recommendation endpoint
+"""
+
+
+def test_can_get_recommendations(_app, _db, client):
+    # Persist to DB stub data
+    _db.session.add(user)
+    _db.session.add(provider1)
+    _db.session.add(provider2)
+    _db.session.commit()
+
+    with _app.test_request_context():
+        access_token = create_access_token(user.id)
+
+    exepected = [ProviderDto.from_orm(provider1), ProviderDto.from_orm(provider2)]
+    exepected = [item.dict(exclude=PROVIDER_EXCLUDE_KEYS) for item in exepected]
+    headers = {"Authorization": access_token}
+    response = client.get("/users/recommendations", headers=headers)
+
+    json_response = response.get_json()
+
+    assert response.status_code == 200
+    assert json_response["recommendations"] == exepected
+
+
+def test_recommendations_without_auth_header(client):
+
+    response = client.get("/users/recommendations")
+
+    assert response.status_code == 401
