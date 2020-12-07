@@ -4,6 +4,8 @@ import secrets
 from typing import Union, Dict
 from flask import Flask
 
+from .error_handler import register_error_handlers
+
 
 def create_app(user_config: Union[os._Environ, Dict]) -> Flask:
     app = Flask(__name__)
@@ -13,5 +15,8 @@ def create_app(user_config: Union[os._Environ, Dict]) -> Flask:
             app.config[app_conf] = user_config.get(app_conf, secrets.token_urlsafe(16))
         else:
             app.config[app_conf] = user_config.get(app_conf, app.config[app_conf])
+
+    # Register error handlers
+    register_error_handlers(app)
 
     return app
