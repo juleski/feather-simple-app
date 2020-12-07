@@ -13,6 +13,7 @@ flask-sqlalchemy = "*"
 psycopg2 = "*"
 passlib = "*"
 email-validator = "*"
+gunicorn = "*"
 
 [dev-packages]
 black = "*"

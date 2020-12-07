@@ -1,10 +1,22 @@
 version: '3.1'
 
 services:
+  api:
+    build: .
+    environment:
+      DB_URI: postgresql://postgres:feather123@db:5432/feather_app
+      FLASK_APP: feather_simple_api
+      FLASK_RUN_HOST: 0.0.0.0
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]
 
   db:
     image: postgres:13.1-alpine
-    container_name: feather-db
     restart: always
     environment:
       POSTGRES_PASSWORD: feather123
@@ -12,3 +24,6 @@ services:
       - "5500:5432"
     volumes:
       - './db/init:/docker-entrypoint-initdb.d/'
+
+volumes:
+  postgres_data:
