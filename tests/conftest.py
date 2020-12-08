@@ -1,22 +1,33 @@
 import pytest
 
-from feather_simple_api import app, db
+from feather_simple_api import db
+from feather_simple_api.core import create_app
+from feather_simple_api.extensions.jwt_extended import create_jwt_app
+from feather_simple_api.core.routes import register_routes  # noqa: F401, E402
+from feather_simple_api.extensions.flask_sqlalchemy import init_db
+
+from .config import test_config
 
 
 @pytest.fixture
-def client(_db):
-    _db.create_all()
+def app(request):
+    jwt = create_jwt_app()
+    app = create_app(test_config, db=db, jwt=jwt)
+    register_routes(app)
+    with app.app_context():
+        init_db(db)
 
-    with app.test_client() as test_client:
-        with app.app_context():
-            yield test_client
+        yield app
 
-    _db.drop_all()
+    @request.addfinalizer
+    def drop_tables():
+        db.drop_all()
 
 
 @pytest.fixture
-def _app():
-    return app
+def client(app):
+    """A test client for the app."""
+    return app.test_client()
 
 
 @pytest.fixture

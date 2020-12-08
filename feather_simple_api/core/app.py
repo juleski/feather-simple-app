@@ -31,17 +31,19 @@ def create_app(
     app.app_context().push()
     if db:
         # flask-sqlalchmey related config
-        app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DB_URI")
+        app.config["SQLALCHEMY_DATABASE_URI"] = user_config.get(
+            "SQLALCHEMY_DATABASE_URI", None
+        )
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         db.init_app(app)
 
     if jwt:
         # jwt-extended related config
-        app.config["JWT_PUBLIC_KEY"] = os.getenv("RSA_PUBLIC", DEV_RSA_PUBLIC)
-        app.config["JWT_PRIVATE_KEY"] = os.getenv("RSA_PRIVATE", DEV_RSA_PRIVATE)
+        app.config["JWT_PUBLIC_KEY"] = user_config.get("RSA_PUBLIC", DEV_RSA_PUBLIC)
+        app.config["JWT_PRIVATE_KEY"] = user_config.get("RSA_PRIVATE", DEV_RSA_PRIVATE)
         app.config["JWT_ALGORITHM"] = "RS256"
-        app.config["JWT_HEADER_TYPE"] = os.getenv("JWT_HEADER_TYPE", "")
-        app.config["JWT_ACCESS_TOKEN_EXPIRES"] = os.getenv(
+        app.config["JWT_HEADER_TYPE"] = user_config.get("JWT_HEADER_TYPE", "")
+        app.config["JWT_ACCESS_TOKEN_EXPIRES"] = user_config.get(
             "JWT_ACCESS_TOKEN_EXPIRES", 3600
         )
         jwt.init_app(app)

@@ -4,7 +4,7 @@ services:
   api:
     build: .
     environment:
-      DB_URI: postgresql://postgres:feather123@db:5432/feather_app
+      SQLALCHEMY_DATABASE_URI: postgresql://postgres:feather123@db:5432/feather_app
       FLASK_APP: feather_simple_api
       FLASK_RUN_HOST: 0.0.0.0
     ports:

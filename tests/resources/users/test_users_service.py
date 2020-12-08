@@ -1,3 +1,5 @@
+import pytest
+
 from werkzeug.exceptions import UnprocessableEntity
 
 from feather_simple_api.resources.users.users_service import UsersService
@@ -5,6 +7,7 @@ from feather_simple_api.resources.users.validators import UserBody
 from .test_input import user_dto, complete_data, provider_dto
 
 
+@pytest.mark.unittest
 def test_create(mocker):
     class MockUsersDao:
         def create(self, params):
@@ -24,6 +27,7 @@ def test_create(mocker):
     assert response.user == user_dto
 
 
+@pytest.mark.unittest
 def test_get_recommendations(mocker):
     class MockUsersDao:
         def get_by_id(self, id):

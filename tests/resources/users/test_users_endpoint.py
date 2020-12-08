@@ -20,6 +20,7 @@ Tests for Create endpoint
 """
 
 
+@pytest.mark.integrationtest
 @pytest.mark.parametrize(
     "test_input",
     [
@@ -34,6 +35,7 @@ def test_create_success(client, test_input):
     assert json_response["user"]["email"] == test_input["email"]
 
 
+@pytest.mark.integrationtest
 @pytest.mark.parametrize(
     "test_input,expected",
     [
@@ -58,27 +60,27 @@ Tests for Recommendation endpoint
 """
 
 
-def test_can_get_recommendations(_app, _db, client):
-    # Persist to DB stub data
+@pytest.mark.integrationtest
+def test_can_get_recommendations(client, _db):
     _db.session.add(user)
     _db.session.add(provider1)
     _db.session.add(provider2)
     _db.session.commit()
 
-    with _app.test_request_context():
-        access_token = create_access_token(user.id)
-
     exepected = [ProviderDto.from_orm(provider1), ProviderDto.from_orm(provider2)]
     exepected = [item.dict(exclude=PROVIDER_EXCLUDE_KEYS) for item in exepected]
+    access_token = create_access_token(user.id)
     headers = {"Authorization": access_token}
     response = client.get("/users/recommendations", headers=headers)
 
     json_response = response.get_json()
 
     assert response.status_code == 200
+    assert "recommendations" in json_response
     assert json_response["recommendations"] == exepected
 
 
+@pytest.mark.integrationtest
 def test_recommendations_without_auth_header(client):
 
     response = client.get("/users/recommendations")
