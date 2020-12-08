@@ -36,9 +36,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/auth/signup",
+							"raw": "{{local_url}}/auth/signup",
 							"host": [
-								"{{url}}"
+								"{{local_url}}"
 							],
 							"path": [
 								"auth",
@@ -148,7 +148,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": \"54bfaa44-ee61-4b92-be51-d1f0eedd7403\",\n    \"password\": \"test\"\n}",
+							"raw": "{\n    \"id\": \"be1924c2-34e3-4e6c-8da4-371b4366feb9\",\n    \"password\": \"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,9 +156,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/auth/login",
+							"raw": "{{local_url}}/auth/login",
 							"host": [
-								"{{url}}"
+								"{{local_url}}"
 							],
 							"path": [
 								"auth",
@@ -203,9 +203,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/users/",
+							"raw": "{{local_url}}/users/",
 							"host": [
-								"{{url}}"
+								"{{local_url}}"
 							],
 							"path": [
 								"users",
@@ -317,9 +317,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users/recommendations",
+							"raw": "{{local_url}}/users/recommendations",
 							"host": [
-								"{{url}}"
+								"{{local_url}}"
 							],
 							"path": [
 								"users",
