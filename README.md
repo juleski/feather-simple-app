@@ -20,6 +20,7 @@
 - `pre-commit install` to setup git hook scripts
 
 ## Running the app
+> copy `.env.sample` as `.env`
 - `docker-compose up &`
 
 ## Running the tests
