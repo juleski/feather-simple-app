@@ -17,11 +17,11 @@ class User(DbModel):
     )
     password = Db.Column(Db.String(255), nullable=True)
     email = Db.Column(Db.String(120), nullable=False)
-    firstname = Db.Column(Db.String(120), nullable=True)
-    address = Db.Column(Db.String(255), nullable=True)
-    occupation = Db.Column(Db.Enum(OccupationStatus), nullable=True)
-    has_child = Db.Column(Db.Boolean, nullable=True)
-    child_num = Db.Column(Db.Integer, nullable=True)
+    firstname = Db.Column(Db.String(120))
+    address = Db.Column(Db.String(255))
+    occupation = Db.Column(Db.Enum(OccupationStatus))
+    has_child = Db.Column(Db.Boolean)
+    child_num = Db.Column(Db.Integer, default=0)
     created = Db.Column(Db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):

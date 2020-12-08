@@ -55,14 +55,14 @@ COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 -- Name: occupationstatus; Type: TYPE; Schema: public; Owner: postgres
 --
 
-CREATE TYPE public.occupationstatus AS ENUM (
-    'employed',
-    'student',
-    'self_employed'
-);
+-- CREATE TYPE public.occupationstatus AS ENUM (
+--     'employed',
+--     'student',
+--     'self_employed'
+-- );
 
 
-ALTER TYPE public.occupationstatus OWNER TO postgres;
+-- ALTER TYPE public.occupationstatus OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -77,7 +77,7 @@ CREATE TABLE public.providers (
     name character varying(120),
     price double precision,
     billing_period character varying(255),
-    for_occupation public.occupationstatus,
+    for_occupation character varying(255),
     created timestamp without time zone
 );
 
@@ -123,3 +123,8 @@ ALTER TABLE ONLY public.providers
 --
 -- PostgreSQL database dump complete
 --
+
+--
+-- Adds pgcrypto extension
+--
+create EXTENSION if not EXISTS "pgcrypto"

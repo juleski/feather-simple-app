@@ -3,6 +3,7 @@ import secrets
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
 from typing import Union, Dict
 from flask import Flask
 
@@ -36,6 +37,8 @@ def create_app(
         )
         app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         db.init_app(app)
+
+        Migrate(app, db)
 
     if jwt:
         # jwt-extended related config

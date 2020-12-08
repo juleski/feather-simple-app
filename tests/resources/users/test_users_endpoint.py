@@ -20,7 +20,7 @@ Tests for Create endpoint
 """
 
 
-@pytest.mark.integrationtest
+@pytest.mark.integration
 @pytest.mark.parametrize(
     "test_input",
     [
@@ -35,7 +35,7 @@ def test_create_success(client, test_input):
     assert json_response["user"]["email"] == test_input["email"]
 
 
-@pytest.mark.integrationtest
+@pytest.mark.integration
 @pytest.mark.parametrize(
     "test_input,expected",
     [
@@ -60,7 +60,7 @@ Tests for Recommendation endpoint
 """
 
 
-@pytest.mark.integrationtest
+@pytest.mark.integration
 def test_can_get_recommendations(client, _db):
     _db.session.add(user)
     _db.session.add(provider1)
@@ -80,7 +80,7 @@ def test_can_get_recommendations(client, _db):
     assert json_response["recommendations"] == exepected
 
 
-@pytest.mark.integrationtest
+@pytest.mark.integration
 def test_recommendations_without_auth_header(client):
 
     response = client.get("/users/recommendations")

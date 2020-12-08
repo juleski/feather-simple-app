@@ -13,7 +13,7 @@ services:
       - ./:/app
     depends_on:
       - db
-    command: ["./wait-for-it.sh", "db:5432", "--", "flask", "run"]
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/entrypoint.sh"]
 
   db:
     image: postgres:13.1-alpine

@@ -3,10 +3,7 @@ from dotenv import load_dotenv
 
 from feather_simple_api.core import create_app
 from feather_simple_api.extensions.jwt_extended import create_jwt_app
-from feather_simple_api.extensions.flask_sqlalchemy import (
-    create_sqlalchemy_app,
-    init_db,
-)
+from feather_simple_api.extensions.flask_sqlalchemy import create_sqlalchemy_app
 from sqlalchemy.ext.declarative import DeclarativeMeta
 
 
@@ -16,16 +13,11 @@ db = create_sqlalchemy_app()
 jwt = create_jwt_app()
 app = create_app(os.environ, db=db, jwt=jwt)
 
-# flask-sqlalchmey related config
-# setup_guids_postgresql(db.engine)
-
 DbModel: DeclarativeMeta = db.Model
 Db: DeclarativeMeta = db
 
 # import models
 from feather_simple_api.core.models import *  # noqa: F401, F403, E402
-
-init_db(db)
 
 # import route back
 from feather_simple_api.core.routes import register_routes  # noqa: F401, E402

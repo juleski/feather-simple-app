@@ -5,7 +5,7 @@ from feather_simple_api.resources.users.user_dto import UserDto
 from .test_input import complete_data
 
 
-@pytest.mark.unittest
+@pytest.mark.unit
 def test_new_user_model():
     user = User(**complete_data)
 
@@ -17,7 +17,7 @@ def test_new_user_model():
     assert user.child_num == complete_data["child_num"]
 
 
-@pytest.mark.unittest
+@pytest.mark.unit
 def test_new_user_dto():
     user = UserDto(**complete_data)
 
