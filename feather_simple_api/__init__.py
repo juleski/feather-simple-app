@@ -16,9 +16,6 @@ app = create_app(os.environ, db=db, jwt=jwt)
 DbModel: DeclarativeMeta = db.Model
 Db: DeclarativeMeta = db
 
-# import models
-from feather_simple_api.core.models import *  # noqa: F401, F403, E402
-
 # import route back
 from feather_simple_api.core.routes import register_routes  # noqa: F401, E402
 
