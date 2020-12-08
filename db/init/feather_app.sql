@@ -123,8 +123,3 @@ ALTER TABLE ONLY public.providers
 --
 -- PostgreSQL database dump complete
 --
-
---
--- Adds pgcrypto extension
---
-create EXTENSION if not EXISTS "pgcrypto"
