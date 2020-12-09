@@ -15,6 +15,7 @@ passlib = "*"
 email-validator = "*"
 gunicorn = "*"
 flask-migrate = "*"
+flask-limiter = "*"
 
 [dev-packages]
 black = "*"
