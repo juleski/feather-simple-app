@@ -51,4 +51,8 @@ def create_app(
         )
         jwt.init_app(app)
 
+    # For flask rate limiter
+    app.config["RATELIMIT_STORAGE_URL"] = user_config.get(
+        "RATELIMIT_STORAGE_URL", "memory://"
+    )
     return app

@@ -2,17 +2,20 @@ version: '3.1'
 
 services:
   api:
+    container_name: feather-api
     build: .
     environment:
       SQLALCHEMY_DATABASE_URI: postgresql://postgres:feather123@db:5432/feather_app
       FLASK_APP: feather_simple_api
       FLASK_RUN_HOST: 0.0.0.0
+      RATELIMIT_STORAGE_URL: redis://redis:6379
     ports:
       - "5000:5000"
     volumes:
       - ./:/app
     depends_on:
       - db
+      - redis
     command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/entrypoint.sh"]
 
   db:
@@ -24,6 +27,11 @@ services:
       - "5500:5432"
     volumes:
       - './db/init:/docker-entrypoint-initdb.d/'
+  
+  redis:
+    image: redis:6.0.9-alpine
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_data:
