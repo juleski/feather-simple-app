@@ -405,6 +405,158 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Questionnaire",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2330a7a2-dd70-4332-86de-aaf2a1914062",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@email.com\",\n    \"firstname\": \"test\",\n    \"address\": \"Metro Manila\",\n    \"occupation\": \"employed\",\n    \"has_child\": true,\n    \"child_num\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/questionnaires/",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"questionnaires",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1a",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "20",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create User Example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@email.com\",\n    \"firstname\": \"test\",\n    \"address\": \"Metro Manila\",\n    \"occupation\": \"employed\",\n    \"has_child\": true,\n    \"child_num\": 3\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/users/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1a",
+											"disabled": true
+										},
+										{
+											"key": "page_size",
+											"value": "20",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "gunicorn/20.0.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Dec 2020 16:03:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "855"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MDc0NDMzODQsIm5iZiI6MTYwNzQ0MzM4NCwianRpIjoiYTY4YjFhZjgtNzFiMS00YjZmLWE1MmMtMzQyMzk3NDYxMjEwIiwiZXhwIjoxNjA3NDQ2OTg0LCJpZGVudGl0eSI6IjhlYzdiNGJjLTg0ZTItNGIwNC1iNjA5LWFkMTM0MjNlMmQyOSIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.A_ygcINHEapwjv76nuIre_0hhG4zDBxPYfVw_Vt8FrQfV-_Vhq5_D40VilPgENp6mlmqv3XSfVET-cKYINLmTXa35Ew1LcdCBxOeqUDVgQdts-NKhcelz6MCYDu3nRBVgacFCIB1wIWd-mDeIVR_9KhFD7HxhBVuVkHVpYGL1QFJKDT7x7u15jRNlnj0cfGdpOuxdsu9GhBvUHNRx9j3TJqeu7j0yqfN9BXHwQWd8XiauKmoWiOy1JBOIedxR0HqUOo7LcvwJMJKWp3f9NpgfcOL3hvHGmYbnPqVK2be_fV5IM0TUypGmd5J2iGHp6fCzzwOih2dayRv7RKG87RZFQ\",\n    \"user\": {\n        \"address\": \"Metro Manila\",\n        \"child_num\": 3,\n        \"created\": \"Tue, 08 Dec 2020 16:03:04 GMT\",\n        \"email\": \"test@email.com\",\n        \"firstname\": \"test\",\n        \"has_child\": true,\n        \"id\": \"8ec7b4bc-84e2-4b04-b609-ad13423e2d29\",\n        \"occupation\": \"employed\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Main resource of the APP. This is where users are created and where they get recommendations",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1e6bf20f-b002-4dff-ba85-2f047b9fd656",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c413028e-8a64-4b0a-ba39-6ab5c38c0d5d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
